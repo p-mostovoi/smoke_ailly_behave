@@ -11,8 +11,9 @@ on:
     branches: [ "main" ]
 
 permissions:
-  actions: write
-
+  pull-requests: write
+  issues: write
+  repository-projects: write
 jobs:
   autotests:
     name: Run tests and generate Allure Report
