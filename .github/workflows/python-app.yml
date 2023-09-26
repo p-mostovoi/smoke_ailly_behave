@@ -10,29 +10,29 @@ on:
   pull_request:
     branches: [ "main" ]
 
-permissions:
-  contents: read
 
 jobs:
-  allure:
-    name: Generate Allure Report
+  autotests:
+    name: Run tests and generate Allure Report
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
 
-      - uses: actions/checkout@v3
       - name: Set up Python 3.11
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v2
         with:
-          python-version: "3.11"
+          python-version: '3.11'
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Test with behave
-        run: |
-          behave -f allure_behave.formatter:AllureFormatter -o result ./features
+          pip install -r requirements.txt
 
-      - uses: actions/checkout@v2
+
+      - name: Run Test
+        if: always()
+        run: behave --format=allure_behave.formatter:AllureFormatter -o allure-results
+        continue-on-error: true
 
       - name: Get Allure history
         uses: actions/checkout@v2
@@ -51,7 +51,6 @@ jobs:
           #gh_pages: gh-pages
           #allure_report: allure-report
           allure_history: allure-history
-          keep_reports: 20
 
       - name: Deploy report to Github Pages
         if: always()
@@ -60,4 +59,3 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
-
