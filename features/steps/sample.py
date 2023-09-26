@@ -25,3 +25,11 @@ def step_impl(context):
     :type context: behave.runner.Context
     """
     assert context.failed is False
+
+
+@step("we implement a fail test")
+def step_impl(context):
+    """
+    :type context: behave.runner.Context
+    """
+    assert True is False
