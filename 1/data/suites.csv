@@ -1,7 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"failed","Mon Oct 09 07:21:16 GMT 2023","Mon Oct 09 07:21:16 GMT 2023","1","","","","","","run a simple test 6",""
-"failed","Mon Oct 09 07:21:16 GMT 2023","Mon Oct 09 07:21:16 GMT 2023","2","","","","","","run a simple test 1",""
-"failed","Mon Oct 09 07:21:16 GMT 2023","Mon Oct 09 07:21:16 GMT 2023","1","","","","","","run a simple test 7",""
-"failed","Mon Oct 09 07:21:16 GMT 2023","Mon Oct 09 07:21:16 GMT 2023","2","","","","","","run a simple test 1",""
-"failed","Mon Oct 09 07:21:16 GMT 2023","Mon Oct 09 07:21:16 GMT 2023","2","","","","","","run a simple test 4",""
-"passed","Mon Oct 09 07:21:16 GMT 2023","Mon Oct 09 07:21:16 GMT 2023","1","","","","","","run a simple test",""
