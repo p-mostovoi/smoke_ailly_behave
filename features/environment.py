@@ -7,6 +7,7 @@
 import json
 import logging
 import os
+import time
 
 from pathlib import Path
 
@@ -67,7 +68,8 @@ def after_scenario(context, scenario):
     """
     # context.page.close()
     context.browser_context.close()
-
+    path = context.page.video.path()
+    allure.attach.file(path, "record", allure.attachment_type.WEBM)
 
 def before_step(context, step):
     """
