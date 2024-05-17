@@ -1,3 +1,6 @@
+import time
+
+import allure
 from behave import *
 
 use_step_matcher("re")
@@ -33,3 +36,35 @@ def step_impl(context):
     :type context: behave.runner.Context
     """
     assert True is False
+
+
+@given("Endpoint page '(?P<endpoint>.+)'")
+def step_impl(context, endpoint):
+    """
+    :type context: behave.runner.Context
+    :type Endpoint: str
+    """
+    context.endpoint = endpoint
+
+
+@when("Open page with predefined endpoint")
+def step_impl(context):
+    """
+    :type context: behave.runner.Context
+    """
+    url = context.endpoint
+    context.page = context.browser_context.new_page()
+    context.page.goto(url)
+
+
+@then("Take screenshot of page")
+def step_impl(context):
+    """
+    :type context: behave.runner.Context
+    """
+    url = context.endpoint
+    img = context.page.screenshot()
+    allure.attach(
+        img,
+        name=f'{url}', attachment_type=allure.attachment_type.PNG
+    )
