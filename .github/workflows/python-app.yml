@@ -41,7 +41,14 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install dependencies  init
-        run: npm ci
+        run: |
+          if [ -e yarn.lock ]; then
+          yarn install --frozen-lockfile
+          elif [ -e package-lock.json ]; then
+          npm ci
+          else
+          npm i
+          fi
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
