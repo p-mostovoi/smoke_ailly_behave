@@ -64,7 +64,13 @@ def step_impl(context):
     """
     url = context.endpoint
     img = context.page.screenshot()
+    time.sleep(2)
     allure.attach(
         img,
         name=f'{url}', attachment_type=allure.attachment_type.PNG
+    )
+    path = context.page.video.path()
+    allure.attach(
+        path,
+        name=f'record', attachment_type=allure.attachment_type.WEBM
     )

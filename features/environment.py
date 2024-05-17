@@ -66,13 +66,7 @@ def after_scenario(context, scenario):
     Actions that should be done after any feature
     """
     # context.page.close()
-    page = context.page
-    page.close()
-    path = page.video.path()
-    allure.attach(
-        path,
-        name=f'record', attachment_type=allure.attachment_type.WEBM
-    )
+    context.browser_context.close()
 
 
 def before_step(context, step):
