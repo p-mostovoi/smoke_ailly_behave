@@ -9,6 +9,8 @@ import logging
 import os
 
 from pathlib import Path
+
+import allure
 from playwright.sync_api import sync_playwright
 
 root_path = Path(__file__).parent.parent
@@ -57,14 +59,20 @@ def before_scenario(context, scenario):
     """
     Actions that should be done before any scenario
     """
-    context.browser_context = context.browser.new_context()
+    context.browser_context = context.browser.new_context(record_video_dir="videos/")
 
 def after_scenario(context, scenario):
     """
     Actions that should be done after any feature
     """
     # context.page.close()
-    context.browser_context.close()
+    page = context.page
+    page.close()
+    path = page.video.path()
+    allure.attach(
+        path,
+        name=f'record', attachment_type=allure.attachment_type.WEBM
+    )
 
 
 def before_step(context, step):
